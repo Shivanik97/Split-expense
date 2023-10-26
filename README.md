@@ -1,4 +1,4 @@
-# vue-auth0
+# Vue-Split-expense
 
 This template should help get you started developing with Vue 3 in Vite.
 
