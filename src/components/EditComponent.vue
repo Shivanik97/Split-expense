@@ -54,8 +54,8 @@
                             <table class="table-fixed">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Share</th>
+                                        <th class="font-medium">Name</th>
+                                        <th class="font-medium">Share</th>
                                     </tr>
                                 </thead>
                                 <tbody>
