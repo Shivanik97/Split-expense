@@ -1,6 +1,6 @@
 <template>
   <header class="bg-gradient-to-r from-gray-500 via-purple-100 to-gray-500">
-    <nav class="flex items-center justify-between ml-2 sticky top-0" aria-label="Global">
+    <nav class="flex px-2 py-2 items-center justify-between ml-2 sticky top-0" aria-label="Global">
       <div class="flex lg:flex-1">
         <a href="/" class="text-lg font-bold leading-6 text-white">Bill-Buddy</a>
         <div v-if="isAuthenticated" class=" items-center">
@@ -10,12 +10,12 @@
       </div>
       <div class=" lg:flex lg:flex-1 lg:justify-end">
         <div v-if="!isAuthenticated">
-          <a href="#" class="text-lg font-semibold leading-6 text-white" @click="login">LogIn <span
+          <a href="#" class="text-lg  font-semibold leading-6 text-white" @click="login">LogIn <span
               aria-hidden="true"></span></a>
         </div>
         <div v-else>
           <button id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation"
-            class=" mr-3 text-sm rounded-full md:mr-0 focus:ring-2 focus:ring-blue-300 text-white  font-medium py-2.5 px-2.5   text-center flex items-center"
+            class=" mr-3 text-sm rounded-full md:mr-0 focus:ring-2 focus:ring-gray-600 text-white  font-medium py-2.5 px-2.5   text-center flex items-center"
             type="button" @click="toggleDropdown">
             <img :src="user?.picture" class="h-6 rounded-xl" />
           </button>
