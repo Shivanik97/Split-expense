@@ -1,5 +1,5 @@
 <template>
-    <div class="m-4 max-w-full bg-white border border-gray-500 rounded-lg shadow-xl sm:p-8">
+    <div class="m-4 max-w-full p-2 bg-white border border-gray-500 rounded-lg shadow-xl sm:p-8">
         <h1 class="flex justify-center font-bold text-lg">Edit Expense</h1>
         <div class="row">
             <div class="col-md-12 add-card">
@@ -17,7 +17,7 @@
                         <div class="mb-3">
                             <label for="payerUserId" class="font-semibold">Payer</label>
                             <select id="payerUserId"
-                                class="mt-2 bg-gray-50 border block text-ellipsis overflow-hidden ... border-gray-300 text-gray-900 text-sm rounded-lg p-1"
+                                class="mt-2 border block text-ellipsis overflow-hidden ... border-gray-300 text-gray-900 text-sm rounded-lg p-1"
                                 v-model="expense.payerUserId">
                                 <option value="" disabled>Select a payer</option>
                                 <option v-for="email in suggestedEmails" :key="email" :value="email">
@@ -50,37 +50,44 @@
                         </button>
                     </div>
                     <div class="">
-                        <div v-for="(participant, index) in expense.participants" :key="index">
-                            <div class="mb-3 flex justify-start items-center space-x-4">
-                                <label :for="`participantName${index}`" class="font-semibold">Name:</label>
-                                <div>
-                                    <select :id="`participantName${index}`"
-                                        class="text-sm rounded-[4px] border border-[#A0ABBB] font-medium text-gray-900 truncate"
-                                        v-model="participant.userId">
-                                        <option value="" disabled>Select a payer</option>
-                                        <option v-for="email in suggestedEmails" :key="email" :value="email">
-                                            {{ email }}
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <label :for="`participantShare${index}`" class="font-semibold">Share:</label>
-                                    <div class="inline-flex">
-                                        <input :id="`participantShare${index}`"
-                                            class="px-1 inline-flex rounded-[4px] border border-[#A0ABBB] items-center text-sm font-semibold text-gray-900"
-                                            v-model="participant.share" />
-                                        <button @click="removeParticipant(index)" class="cancel-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                        <div>
+                            <table class="table-fixed">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Share</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(participant, index) in expense.participants" :key="index">
+                                        <td>
+                                            <select :id="`participantName${index}`"
+                                                class="border border-gray-300 text-ellipsis overflow-hidden ... text-gray-900 text-sm rounded-lg p-2 w-full"
+                                                v-model="participant.userId">
+                                                <option value="" disabled>Select a payer</option>
+                                                <option v-for="email in suggestedEmails" :key="email" :value="email">{{
+                                                    email }}</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <div class="ml-2 inline-flex items-center">
+                                                <input :id="`participantShare${index}`"
+                                                    class="border border-gray-300 text-ellipsis overflow-hidden ... text-gray-900 text-sm rounded-lg p-2 w-full"
+                                                    v-model="participant.share" />
+                                                <button @click="removeParticipant(index)" class="cancel-icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="flex justify-center ">
+                        <div class="flex justify-center mt-2">
                             <button
                                 class="cursor-pointer rounded-[4px] mt-2 bg-gradient-to-r from-gray-600 to-gray-400 px-3 py-[6px] text-center font-semibold text-white"
                                 @click="updateExpense">
@@ -106,7 +113,7 @@
   
  
 <script lang="ts" setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import axiosInstance from '../services/api'
 import type { GetTransactionData } from '../models/model'

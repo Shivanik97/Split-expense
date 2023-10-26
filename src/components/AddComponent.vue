@@ -49,7 +49,7 @@
                         <div class="font-semibold">Date</div>
                         <div class="mt-2">
                             <div>
-                                <input type="date" class="bg-neutral-100 p-3 w-full" v-model="formData.date" />
+                                <input type="date" class="bg-neutral-100 rounded-lg p-3 w-full" v-model="formData.date" />
                             </div>
                         </div>
                     </div>
