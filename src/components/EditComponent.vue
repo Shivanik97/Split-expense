@@ -1,6 +1,5 @@
 <template>
-    <div
-        class="m-4 max-w-full bg-white border border-gray-200 rounded-lg shadow-xl sm:p-8">
+    <div class="m-4 max-w-full bg-white border border-gray-500 rounded-lg shadow-xl sm:p-8">
         <h1 class="flex justify-center font-bold text-lg">Edit Expense</h1>
         <div class="row">
             <div class="col-md-12 add-card">
@@ -81,20 +80,19 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="flex justify-center">
+                        <div class="flex justify-center ">
                             <button
-                                class="cursor-pointer rounded-[4px] mt-2 bg-blue-500 px-3 py-[6px] text-center font-semibold text-white"
+                                class="cursor-pointer rounded-[4px] mt-2 bg-gradient-to-r from-gray-600 to-gray-400 px-3 py-[6px] text-center font-semibold text-white"
                                 @click="updateExpense">
                                 Update Expense
                             </button>
                             <button
-                                class="cursor-pointer rounded-[4px] mt-2 ml-2 bg-blue-500 px-3 py-[6px] text-center font-semibold text-white"
+                                class="cursor-pointer rounded-[4px] mt-2 ml-2 bg-gradient-to-r from-gray-600 to-gray-400 px-3 py-[6px] text-center font-semibold text-white"
                                 @click="cancelExpense">
                                 Cancel
                             </button>
                             <router-link to="/ViewComponent"
-                                class="cursor-pointer rounded-[4px] mt-2 ml-2 bg-blue-500 px-3 py-[6px] text-center font-semibold text-white"
-                                >
+                                class="cursor-pointer rounded-[4px] mt-2 ml-2 bg-gradient-to-r from-gray-600 to-gray-400 px-3 py-[6px] text-center font-semibold text-white">
                                 Back
                             </router-link>
                         </div>

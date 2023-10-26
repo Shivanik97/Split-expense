@@ -1,8 +1,7 @@
 <template>
     <div class="flex p-8 justify-center">
         <form @submit.prevent="submitForm">
-            <div
-                class="w-full p-4 max-w-md bg-white border border-gray-200 rounded-lg shadow-xl sm:p-8">
+            <div class="w-full p-4 max-w-md bg-white border border-gray-500 rounded-lg shadow-xl sm:p-8">
                 <div class="mx-auto bg-white">
                     <div class="flex items-center justify-between">
                         <span class="font-bold text-base text-black">Add Expense</span>
@@ -60,12 +59,12 @@
                             <span class="font-semibold text-[#191D23] mr-4">Split between {{ selectedPeople.length }}
                                 people</span>
                             <button class="flex cursor-pointer items-center gap-x-1" @click="openAddPeopleDialog">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-700" fill="none"
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                <div class="font-semibold text-blue-700">Add People</div>
+                                <div class="font-semibold text-gray-500">Add People</div>
                             </button>
                         </div>
 
@@ -75,26 +74,29 @@
                                     <div class="flex items-center space-x-4">
                                         <input id="checkbox-{{ index }}" type="checkbox" :value="participant"
                                             v-model="selectedPeople"
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500" />
+                                            class="w-4 h-4 text-cyan-200 bg-gray-100 border-gray-300 rounded focus:ring-cyan-200" />
                                         <div class="flex-1 min-w-0">
                                             <p class="text-sm font-medium text-gray-900 truncate">
                                                 {{ participant.userId }}
                                             </p>
                                         </div>
-                                        <div
-                                            class="inline-flex items-center text-base font-semibold text-gray-900">
-                                            {{ participant.share }}
+                                        <div class="inline-flex items-center text-base font-semibold text-gray-900">
+                                            {{ participant.share.toFixed(2) }}
                                         </div>
                                     </div>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <div class="mt-6">
+                    <div class="mt-6 flex justify-center">
                         <button
-                            class="w-full cursor-pointer rounded-[4px] bg-blue-500 px-3 py-[6px] text-center font-semibold text-white"
+                            class="w-full cursor-pointer rounded-[4px] bg-gradient-to-r from-gray-600 to-gray-400 px-3 py-[6px] text-center font-semibold text-white"
                             type="submit">
                             Done</button>
+                        <router-link to="/ViewComponent"
+                            class="w-full ml-2 cursor-pointer rounded-[4px] bg-gradient-to-r from-gray-600 to-gray-400 px-3 py-[6px] text-center font-semibold text-white"
+                            type="submit">
+                            Back</router-link>
                     </div>
                 </div>
             </div>
@@ -102,9 +104,9 @@
         <div class="fixed inset-0 flex items-center justify-center z-50" v-if="isAddPeopleModalOpen">
             <div class="absolute inset-0 bg-gray-800 opacity-75" @click="closeAddPeopleDialog"></div>
             <div class="relative bg-white border rounded-lg shadow-xl max-w-md p-8">
-                <h2 class="text-xl font-semibold mb-4">Add People to Split</h2>
-                <div class="bg-grey-300" v-for="email in suggestedEmails" :key="email">
-                    <span class="bg-red-300 px-2 cursor-copy" @click="copyEmail(email)">{{ email }} <span
+                <h2 class="text-xl font-semibold mb-4 ">Add People to Split</h2>
+                <div class="bg-gradient-to-r from-gray-300 to-gray-100" v-for="email in suggestedEmails" :key="email">
+                    <span class="px-2 cursor-copy" @click="copyEmail(email)">{{ email }} <span
                             class="close-icon  text-black cursor-pointer"
                             @click="removeSuggestion(email)">&times;</span></span>
                 </div>
@@ -113,7 +115,7 @@
                 <input v-model="shareInput" type="number" placeholder="Share Value"
                     class="mt-2 p-2 w-full border border-gray-300 rounded-md" />
                 <button
-                    class="w-full cursor-pointer rounded-[4px] mt-2 bg-blue-500 px-3 py-[6px] text-center font-semibold text-white"
+                    class="w-full cursor-pointer rounded-[4px] mt-2 bg-gradient-to-r from-gray-600 to-gray-400 px-3 py-[6px] text-center font-semibold text-white"
                     @click="addSelectedPeople">Add Selected</button>
             </div>
         </div>

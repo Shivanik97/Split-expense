@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-blue-500">
+  <header class="bg-gradient-to-r from-gray-500 via-purple-100 to-gray-500">
     <nav class="flex items-center justify-between ml-2 sticky top-0" aria-label="Global">
       <div class="flex lg:flex-1">
         <a href="/" class="text-lg font-bold leading-6 text-white">Bill-Buddy</a>
@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watchEffect } from "vue";
+import { ref } from "vue";
 import { auth0 } from "./config/config";
 // Other setup logic
 const { loginWithRedirect, isAuthenticated, logout, user } = auth0;
