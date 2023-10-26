@@ -2,7 +2,7 @@
     <div class="flex p-8 justify-center">
         <form @submit.prevent="submitForm">
             <div
-                class="w-full p-4 max-w-md bg-white border border-gray-200 rounded-lg shadow-xl sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+                class="w-full p-4 max-w-md bg-white border border-gray-200 rounded-lg shadow-xl sm:p-8">
                 <div class="mx-auto bg-white">
                     <div class="flex items-center justify-between">
                         <span class="font-bold text-base text-black">Add Expense</span>
@@ -77,12 +77,12 @@
                                             v-model="selectedPeople"
                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500" />
                                         <div class="flex-1 min-w-0">
-                                            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                            <p class="text-sm font-medium text-gray-900 truncate">
                                                 {{ participant.userId }}
                                             </p>
                                         </div>
                                         <div
-                                            class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                            class="inline-flex items-center text-base font-semibold text-gray-900">
                                             {{ participant.share }}
                                         </div>
                                     </div>

@@ -1,6 +1,6 @@
 <template>
     <div
-        class="m-4 max-w-full bg-white border border-gray-200 rounded-lg shadow-xl sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+        class="m-4 max-w-full bg-white border border-gray-200 rounded-lg shadow-xl sm:p-8">
         <h1 class="flex justify-center font-bold text-lg">Edit Expense</h1>
         <div class="row">
             <div class="col-md-12 add-card">
@@ -41,7 +41,7 @@
                 <div class="mb-4" v-if="expense">
                     <div class="flex justify-between">
                         <h5 class="font-semibold mb-2">Participants</h5>
-                        <button class="add-button border-0 bg-dark rounded-pill" @click="addParticipant">
+                        <button class="add-button border-0  rounded-pill" @click="addParticipant">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -56,7 +56,7 @@
                                 <label :for="`participantName${index}`" class="font-semibold">Name:</label>
                                 <div>
                                     <select :id="`participantName${index}`"
-                                        class="text-sm rounded-[4px] border border-[#A0ABBB] font-medium text-gray-900 truncate dark:text-white"
+                                        class="text-sm rounded-[4px] border border-[#A0ABBB] font-medium text-gray-900 truncate"
                                         v-model="participant.userId">
                                         <option value="" disabled>Select a payer</option>
                                         <option v-for="email in suggestedEmails" :key="email" :value="email">
@@ -68,7 +68,7 @@
                                     <label :for="`participantShare${index}`" class="font-semibold">Share:</label>
                                     <div class="inline-flex">
                                         <input :id="`participantShare${index}`"
-                                            class="px-1 inline-flex rounded-[4px] border border-[#A0ABBB] items-center text-sm font-semibold text-gray-900 dark:text-white"
+                                            class="px-1 inline-flex rounded-[4px] border border-[#A0ABBB] items-center text-sm font-semibold text-gray-900"
                                             v-model="participant.share" />
                                         <button @click="removeParticipant(index)" class="cancel-icon">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
