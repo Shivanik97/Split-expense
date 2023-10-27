@@ -120,6 +120,7 @@
 import { onMounted, ref } from 'vue';
 import { useToast } from 'vue-toastification'
 import axiosInstance from '../services/api'
+import router from '@/router';
 
 const toast = useToast()
 const formData = ref({
@@ -230,7 +231,7 @@ const submitForm = async () => {
         formData.value.date = '';
 
         isFormReady.value = false;
-
+        router.push('/ViewComponent')
     } catch (error) {
         toast.error('Failed to create transaction')
         console.error('Error:', error);

@@ -6,7 +6,7 @@
         <h1 class="text-3xl font-bold text-black">Welcome to</h1>
         <h1 class="text-4xl mt-4 mb-4 font-bold text-black">Split-Expense</h1>
         <h2 class="text-lg font-bold mb-4 text-black">"In Money We Trust, In Split We Prosper!"</h2>
-        <router-link to="/AddExpense"
+        <router-link to=""
           class="cursor-pointer rounded-[4px]  bg-primary px-3 py-[6px] text-center font-semibold text-white">
           Get started
         </router-link>
