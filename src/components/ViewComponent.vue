@@ -1,12 +1,12 @@
 <template>
     <nav>
         <div class="flex p-4 mb-1 mt-2 justify-center" id="nav-tab" role="tablist">
-            <button class="mr-2 px-4 font-semibold py-2 text-lg rounded-lg"
-                :class="{ 'border-b-2 border-gray-500': isActiveTab('All') }" @click.prevent="activeTab = 'All'">
+            <button class="transform active:scale-75 transition-transform mr-2 px-4 font-semibold py-2 text-lg rounded-lg"
+                :class="{ 'border border-gray-500': isActiveTab('All') }" @click.prevent="activeTab = 'All'">
                 Transactions
             </button>
-            <button class="px-4 font-semibold py-2 text-lg rounded-lg"
-                :class="{ 'border-b-2 border-gray-500': isActiveTab('Archived') }" @click.prevent="activeTab = 'Archived'">
+            <button class="transform active:scale-75 transition-transform px-4 font-semibold py-2 text-lg rounded-lg"
+                :class="{ 'border border-gray-500': isActiveTab('Archived') }" @click.prevent="activeTab = 'Archived'">
                 Archived
             </button>
         </div>
@@ -21,7 +21,7 @@
         </div>
     </div>
     <div v-else class="mx-auto max-w-screen">
-        <div class="p-4 w-full max-w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div class="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             <div v-for="expense in expenses" :key="expense._id" v-if="isActiveTab('All')"
                 class="w-full p-2 max-w-md bg-white border border-gray-500 rounded-lg shadow-xl sm:p-8 transform transition duration-500 hover:scale-105">
                 <div class="flex flex-col items-center md:flex-row justify-evenly mb-4">
@@ -103,7 +103,7 @@
         </div>
     </div>
     <div v-else class="mx-auto max-w-screen px-4">
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div v-for="expense in Archivedexpenses" :key="expense._id" v-if="isActiveTab('Archived')"
                 class="w-full border-gray-500 transform transition duration-500 hover:scale-105 p-3 max-w-md bg-white border rounded-lg shadow-xl sm:p-8 ">
                 <div class="flex flex-col items-center md:flex-row justify-evenly mb-4">
