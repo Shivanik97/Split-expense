@@ -103,7 +103,7 @@
         </div>
     </div>
     <div v-else class="mx-auto max-w-screen px-4">
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             <div v-for="expense in Archivedexpenses" :key="expense._id" v-if="isActiveTab('Archived')"
                 class="w-full border-gray-500 transform transition duration-500 hover:scale-105 p-3 max-w-md bg-white border rounded-lg shadow-xl sm:p-8 ">
                 <div class="flex flex-col items-center md:flex-row justify-evenly mb-4">
