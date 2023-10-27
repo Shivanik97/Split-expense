@@ -3,14 +3,8 @@
         <form @submit.prevent="submitForm">
             <div class="w-full p-4 max-w-md bg-white border border-gray-500 rounded-lg shadow-xl sm:p-8">
                 <div class="mx-auto bg-white">
-                    <div class="flex items-center justify-between">
+                    <div class="flex items-center justify-center">
                         <span class="font-bold text-base text-black">Add Expense</span>
-                        <div class="cursor-pointer border rounded-[4px]">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#64748B]" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </div>
                     </div>
 
                     <div class="mt-6">
@@ -59,12 +53,12 @@
                             <span class="font-semibold text-[#191D23] mr-4">Split between {{ selectedPeople.length }}
                                 people</span>
                             <button class="flex cursor-pointer items-center gap-x-1" @click="openAddPeopleDialog">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none"
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                <div class="font-semibold text-gray-500">Add People</div>
+                                <div class="font-semibold text-primary">Add People</div>
                             </button>
                         </div>
 
@@ -90,11 +84,11 @@
                     </div>
                     <div class="mt-6 flex justify-center">
                         <button
-                            class="w-full cursor-pointer rounded-[4px] bg-gradient-to-r from-gray-600 to-gray-400 px-3 py-[6px] text-center font-semibold text-white"
+                            class="w-full cursor-pointer rounded-[4px] bg-primary px-3 py-[6px] text-center font-semibold text-white"
                             type="submit">
                             Done</button>
                         <router-link to="/ViewComponent"
-                            class="w-full ml-2 cursor-pointer rounded-[4px] bg-gradient-to-r from-gray-600 to-gray-400 px-3 py-[6px] text-center font-semibold text-white"
+                            class="w-full ml-2 cursor-pointer rounded-[4px] bg-primary px-3 py-[6px] text-center font-semibold text-white"
                             type="submit">
                             Back</router-link>
                     </div>
@@ -112,10 +106,9 @@
                 </div>
                 <input v-model="userIdInput" type="text" placeholder="User ID"
                     class="mt-4 p-2 w-full border border-gray-300 rounded-md" />
-                <input v-model="shareInput" type="number" placeholder="Share Value"
-                    class="mt-2 p-2 w-full border border-gray-300 rounded-md" />
+                
                 <button
-                    class="w-full cursor-pointer rounded-[4px] mt-2 bg-gradient-to-r from-gray-600 to-gray-400 px-3 py-[6px] text-center font-semibold text-white"
+                    class="w-full cursor-pointer rounded-[4px] mt-2 bg-primary px-3 py-[6px] text-center font-semibold text-white"
                     @click="addSelectedPeople">Add Selected</button>
             </div>
         </div>

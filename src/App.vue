@@ -1,28 +1,31 @@
 <template>
-  <header class="bg-gradient-to-r from-gray-500 via-purple-100 to-gray-500">
+  <header class="bg-primary">
     <nav class="flex px-2 py-2 items-center justify-between ml-2 sticky top-0" aria-label="Global">
-      <div class="flex lg:flex-1">
-        <a href="/" class="text-lg font-bold leading-6 text-white">Bill-Buddy</a>
-        <div v-if="isAuthenticated" class=" items-center">
-          <router-link to="/ViewComponent" class="p-4 text-white font-bold transition duration-300">Home</router-link>
-          <router-link to="/AddExpense" class="font-bold text-white transition duration-300">Add Expense</router-link>
+      <img src="./assets/icon2.png" class="h-10" />
+      <div class="flex items-center"> <!-- Use "items-center" to vertically center items -->
+        <a href="/" class="text-lg ml-2 font-bold leading-6 text-white">Split-Expense</a>
+        <div v-if="isAuthenticated" class="items-center ml-4">
+          <router-link to="/ViewComponent" class="p-2 text-white font-bold transition duration-300">Home</router-link>
+          <router-link to="/AddExpense" class="p-2 font-bold text-white transition duration-300">Add Expense</router-link>
         </div>
       </div>
-      <div class=" lg:flex lg:flex-1 lg:justify-end">
-        <div v-if="!isAuthenticated">
-          <a href="#" class="text-lg  font-semibold leading-6 text-white" @click="login">LogIn <span
-              aria-hidden="true"></span></a>
-        </div>
-        <div v-else>
+      <div class="lg:flex lg:flex-1 lg:justify-end"> <!-- Show this part on large screens -->
+        <div v-if="isAuthenticated">
           <button id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation"
-            class=" mr-3 text-sm rounded-full md:mr-0 focus:ring-2 focus:ring-gray-600 text-white  font-medium py-2.5 px-2.5   text-center flex items-center"
+            class="mr-3 text-sm rounded-full md:mr-0 focus:ring-2 focus:ring-gray-600 text-white font-medium py-2.5 px-2.5 text-center flex items-center"
             type="button" @click="toggleDropdown">
             <img :src="user?.picture" class="h-6 rounded-xl" />
           </button>
         </div>
       </div>
+      <div class="lg:hidden"> <!-- Show this part on small screens -->
+        <div v-if="!isAuthenticated">
+          <a href="#" class="text-lg font-semibold leading-6 text-white" @click="login">LogIn</a>
+        </div>
+      </div>
     </nav>
   </header>
+
   <!-- Dropdown menu -->
   <div id="dropdownInformation"
     class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-max  absolute top-16 right-0 mt-2">
@@ -66,4 +69,8 @@ const logoutUser = () => {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+html {
+  overflow-x: hidden;
+}
+</style>

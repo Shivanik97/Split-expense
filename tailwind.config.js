@@ -12,7 +12,12 @@ export default {
       'xl': '1536px',
       // => @media (min-width: 1280px) { ... }
     },
-    extend: {},
+    extend: {
+      colors: {
+        'primary': '#336963',
+        'secondary': '#6a8a9d'
+      },
+    },
   },
   plugins: [],
 }

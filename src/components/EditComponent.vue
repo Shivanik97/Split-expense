@@ -89,17 +89,17 @@
                         </div>
                         <div class="flex justify-center mt-2">
                             <button
-                                class="cursor-pointer rounded-[4px] mt-2 bg-gradient-to-r from-gray-600 to-gray-400 px-3 py-[6px] text-center font-semibold text-white"
+                                class="cursor-pointer rounded-[4px] mt-2 bg-primary px-3 py-[6px] text-center font-semibold text-white"
                                 @click="updateExpense">
                                 Update Expense
                             </button>
                             <button
-                                class="cursor-pointer rounded-[4px] mt-2 ml-2 bg-gradient-to-r from-gray-600 to-gray-400 px-3 py-[6px] text-center font-semibold text-white"
+                                class="cursor-pointer rounded-[4px] mt-2 ml-2 bg-primary px-3 py-[6px] text-center font-semibold text-white"
                                 @click="cancelExpense">
                                 Cancel
                             </button>
                             <router-link to="/ViewComponent"
-                                class="cursor-pointer rounded-[4px] mt-2 ml-2 bg-gradient-to-r from-gray-600 to-gray-400 px-3 py-[6px] text-center font-semibold text-white">
+                                class="cursor-pointer rounded-[4px] mt-2 ml-2 bg-primary px-3 py-[6px] text-center font-semibold text-white">
                                 Back
                             </router-link>
                         </div>

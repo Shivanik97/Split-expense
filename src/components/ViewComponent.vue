@@ -2,11 +2,11 @@
     <nav>
         <div class="flex p-4 mb-1 mt-2 justify-center" id="nav-tab" role="tablist">
             <button class="transform active:scale-75 transition-transform mr-2 px-4 font-semibold py-2 text-lg rounded-lg"
-                :class="{ 'border border-gray-500': isActiveTab('All') }" @click.prevent="activeTab = 'All'">
+                :class="{ 'border border-secondary': isActiveTab('All') }" @click.prevent="activeTab = 'All'">
                 Transactions
             </button>
             <button class="transform active:scale-75 transition-transform px-4 font-semibold py-2 text-lg rounded-lg"
-                :class="{ 'border border-gray-500': isActiveTab('Archived') }" @click.prevent="activeTab = 'Archived'">
+                :class="{ 'border border-secondary': isActiveTab('Archived') }" @click.prevent="activeTab = 'Archived'">
                 Archived
             </button>
         </div>
@@ -20,15 +20,15 @@
             role="status">
         </div>
     </div>
-    <div v-else class="mx-auto max-w-screen">
+    <div v-else class="mx-auto max-w-screen ">
         <div class="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             <div v-for="expense in expenses" :key="expense._id" v-if="isActiveTab('All')"
-                class="w-full p-2 max-w-md bg-white border border-gray-500 rounded-lg shadow-xl sm:p-8 transform transition duration-500 hover:scale-105">
+                class="w-full p-2 max-w-md bg-white border rounded-lg shadow-xl sm:p-8 transform transition duration-500 hover:scale-105">
                 <div class="flex flex-col items-center md:flex-row justify-evenly mb-4">
                     <img :src="expense.payerProfilePicture" class="mb-2 mr-2 md:mb-0 w-12 rounded-full h-12" />
                     <div class="md:inline-flex">
                         <router-link :to="{ name: 'Update', params: { id: expense._id } }"
-                            class="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 outline outline-1 rounded inline-flex items-center">
+                            class="border-secondary border hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded inline-flex items-center">
                             <svg class="w-4 h-4 mr-2 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -37,7 +37,7 @@
                             <span>Edit</span>
                         </router-link>
                         <button
-                            class="ml-4 bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 outline outline-1 rounded inline-flex items-center"
+                            class="ml-4 bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 border-secondary border rounded inline-flex items-center"
                             @click="archiveTransaction(expense._id)">
                             <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor">
@@ -47,7 +47,7 @@
                             <span>Archive</span>
                         </button>
                         <button v-if="expense.payerUserId === user?.email"
-                        class="ml-4 bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 outline outline-1 rounded inline-flex items-center"
+                        class="ml-4 bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 border-secondary border rounded inline-flex items-center"
                         @click="userDelete(expense._id, 'expenses')">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-4 h-4 mr-2">
@@ -61,16 +61,16 @@
                 </div>
                 <div class="flex flex-wrap">
                     <div
-                        class="w-full capitalize h-8 mb-2 px-1 py-1 font-semibold overflow-hidden whitespace-nowrap text-ellipsis rounded-md bg-gradient-to-r from-gray-400 to-gray-200">
+                        class="w-full capitalize h-8 mb-2 px-1 py-1 text-white font-semibold overflow-hidden whitespace-nowrap text-ellipsis rounded-md bg-gradient-to-r from-primary to-secondary">
                         {{ expense.description }} on {{
                             formatDate(expense.date) }}
                     </div>
-                    <div class="w-full h-8 px-1 py-1 text-base rounded-md bg-gradient-to-r from-gray-400 to-gray-200">
+                    <div class="w-full h-8 px-1 py-1 text-base text-white rounded-md bg-gradient-to-r from-primary to-secondary">
                         Amount: ${{ expense.amount }}
 
                     </div>
                     <div class="mt-4 font-semibold">Payer: </div>
-                    <div class="mt-4 ml-2 rounded-md px-1 font-semibold bg-purple-100">
+                    <div class="mt-4 ml-2 rounded-md px-1 text-white text-sm font-semibold bg-[#429186]">
                         {{ expense.payerUserId }}
                     </div>
                 </div>
@@ -105,11 +105,11 @@
     <div v-else class="mx-auto max-w-screen px-4">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             <div v-for="expense in Archivedexpenses" :key="expense._id" v-if="isActiveTab('Archived')"
-                class="w-full border-gray-500 transform transition duration-500 hover:scale-105 p-3 max-w-md bg-white border rounded-lg shadow-xl sm:p-8 ">
+                class="w-full transform transition duration-500 hover:scale-105 p-3 max-w-md bg-white border rounded-lg shadow-xl sm:p-8 ">
                 <div class="flex flex-col items-center md:flex-row justify-evenly mb-4">
                     <div class="md:inline-flex">
                         <router-link :to="{ name: 'Update', params: { id: expense._id } }"
-                            class="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 outline outline-1 rounded inline-flex items-center">
+                            class="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 border-secondary border rounded inline-flex items-center">
                             <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -119,7 +119,7 @@
                         </router-link>
 
                         <button v-if="expense.payerUserId === user?.email"
-                            class="ml-4 bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 outline outline-1 rounded inline-flex items-center"
+                            class="ml-4 bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 border-secondary border rounded inline-flex items-center"
                             @click="userDelete(expense._id, 'expenses')">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-4 h-4 mr-2">
@@ -132,16 +132,16 @@
                 </div>
                 <div class="flex flex-wrap">
                     <div
-                        class="w-full capitalize h-8 mb-2 px-1 py-1 font-semibold overflow-hidden whitespace-nowrap text-ellipsis rounded-md bg-gradient-to-r from-gray-400 to-gray-200">
+                        class="w-full capitalize h-8 text-white mb-2 px-1 py-1 font-semibold overflow-hidden whitespace-nowrap text-ellipsis rounded-md bg-gradient-to-r from-primary to-secondary">
                         {{ expense.description }} on {{
                             formatDate(expense.date) }}
                     </div>
-                    <div class="w-full h-8 px-1 py-1 text-base rounded-md bg-gradient-to-r from-gray-400 to-gray-200">
+                    <div class="w-full h-8 px-1 py-1 text-base  text-white rounded-md bg-gradient-to-r from-primary to-secondary">
                         Amount: ${{ expense.amount }}
 
                     </div>
                     <div class="mt-4 font-semibold">Payer: </div>
-                    <div class="mt-4 ml-2 rounded-md px-1 font-semibold bg-purple-100">
+                    <div class="mt-4 ml-2 rounded-md px-1 text-white font-semibold bg-[#429186]">
                         {{ expense.payerUserId }}
                     </div>
                 </div>
@@ -150,7 +150,7 @@
                         <p class="text-lg text-gray-900 font-bold">
                             Participants:
                         </p>
-                        <div class="mt-4 rounded-md px-1 font-medium bg-gradient-to-r from-gray-400 to-gray-200">
+                        <div class="flex text-center mt-4 rounded-md px-1 font-medium text-white bg-gradient-to-r from-primary to-secondary">
                             {{ expense.participants?.map(participant => participant.userId).join(', ') || 'No participants'
                             }}
                         </div>
