@@ -3,7 +3,7 @@
     <nav class="flex px-2 py-2 items-center justify-between ml-2 sticky top-0" aria-label="Global">
       <img src="./assets/icon2.png" class="h-10"/>
       <div class="flex lg:flex-1">
-        <a href="/" class="text-lg font-bold leading-6 ml-2 text-white">Bill-Buddy</a>
+        <a href="/" class="text-lg font-bold leading-6 ml-2 text-white">Split-Expense</a>
         <div v-if="isAuthenticated" class=" items-center">
           <router-link to="/ViewComponent" class="p-4 text-white font-bold transition duration-300">Home</router-link>
           <router-link to="/AddExpense" class="font-bold text-white transition duration-300">Add Expense</router-link>
