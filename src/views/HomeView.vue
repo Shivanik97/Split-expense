@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <!-- Navigation -->
-    <nav class="mt-16 py-4">
+    <div class="mt-16 py-4">
       <div class="container mx-auto text-center">
         <h1 class="text-3xl font-bold text-black">Welcome to</h1>
         <h1 class="text-4xl mt-4 mb-4 font-bold text-black">Split-Expense</h1>
@@ -11,7 +11,7 @@
           Get started
         </router-link>
       </div>
-    </nav>
+    </div>
 
     <!-- Content -->
     <div class="container mx-auto py-8 px-4">
