@@ -27,10 +27,12 @@
                                             d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
                                     <div>
-                                        <select id="names" style="width: 250px"
+                                        <select id="payerUserid" style="width: 250px"
                                             class="bg-gray-50 border block text-ellipsis overflow-hidden ... border-gray-300 text-gray-900 text-sm rounded-lg p-1"
                                             v-model="selectedEmail">
-                                            <option v-for="email in suggestedEmails" :key="email">{{ email }}
+                                            <option v-for="email in suggestedEmails" :key="email" :value="email">{{
+                                                emailWithMe(email,
+                                                    formData.payerUserId, user?.email) }}
                                             </option>
                                         </select>
                                     </div>
@@ -53,8 +55,8 @@
                             <span class="font-semibold text-[#191D23] mr-4">Split between {{ selectedPeople.length }}
                                 people</span>
                             <button class="flex cursor-pointer items-center gap-x-1" @click="openAddPeopleDialog">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 stroke-secondary text-primary"
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
@@ -71,7 +73,8 @@
                                             class="w-4 h-4 text-cyan-200 bg-gray-100 border-gray-300 rounded focus:ring-cyan-200" />
                                         <div class="flex-1 min-w-0">
                                             <p class="text-sm font-medium text-gray-900 truncate">
-                                                {{ participant.userId }}
+                                                {{ emailWithMe(participant.userId,
+                                                    formData.payerUserId, user?.email) }}
                                             </p>
                                         </div>
                                         <div class="inline-flex items-center text-base font-semibold text-gray-900">
@@ -83,14 +86,14 @@
                         </div>
                     </div>
                     <div class="mt-6 flex justify-center">
-                        <button
+                        <router-link to="/ViewComponent"
                             class="w-full cursor-pointer rounded-[4px] bg-primary px-3 py-[6px] text-center font-semibold text-white"
                             type="submit">
-                            Done</button>
-                        <router-link to="/ViewComponent"
+                            Back</router-link>
+                        <button
                             class="w-full ml-2 cursor-pointer rounded-[4px] bg-primary px-3 py-[6px] text-center font-semibold text-white"
                             type="submit">
-                            Back</router-link>
+                            Done</button>
                     </div>
                 </div>
             </div>
@@ -99,14 +102,14 @@
             <div class="absolute inset-0 bg-gray-800 opacity-75" @click="closeAddPeopleDialog"></div>
             <div class="relative bg-white border rounded-lg shadow-xl max-w-md p-8">
                 <h2 class="text-xl font-semibold mb-4 ">Add People to Split</h2>
-                <div class="bg-gradient-to-r from-gray-300 to-gray-100" v-for="email in suggestedEmails" :key="email">
+                <div class="bg-gradient-to-r from-primary from-20%  to-secondary to-80% text-white" v-for="email in suggestedEmails" :key="email">
                     <span class="px-2 cursor-copy" @click="copyEmail(email)">{{ email }} <span
-                            class="close-icon  text-black cursor-pointer"
+                            class="close-icon  text-white cursor-pointer"
                             @click="removeSuggestion(email)">&times;</span></span>
                 </div>
                 <input v-model="userIdInput" type="text" placeholder="User ID"
                     class="mt-4 p-2 w-full border border-gray-300 rounded-md" />
-                
+
                 <button
                     class="w-full cursor-pointer rounded-[4px] mt-2 bg-primary px-3 py-[6px] text-center font-semibold text-white"
                     @click="addSelectedPeople">Add Selected</button>
@@ -117,10 +120,13 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useToast } from 'vue-toastification'
 import axiosInstance from '../services/api'
 import router from '@/router';
+import { useAuth0 } from '@auth0/auth0-vue'
+
+const { user } = useAuth0()
 
 const toast = useToast()
 const formData = ref({
@@ -164,6 +170,12 @@ const getSuggestedEmails = async () => {
         console.error('Error fetching suggested emails:', error);
     }
 }
+const emailWithMe = computed(() => (email: any, userId: any, currentUser: any) => {
+    if (currentUser && email === currentUser) {
+        return `${email} (ME)`;
+    }
+    return email;
+})
 
 const openAddPeopleDialog = () => {
     isAddPeopleModalOpen.value = true;
