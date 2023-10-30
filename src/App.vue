@@ -33,8 +33,15 @@
       <div class="flex items-center">
         <ul class="flex flex-row font-medium mt-0 space-x-4 text-sm">
           <li>
-            <router-link to="/ViewComponent" class="text-base p-2 rounded-md text-gray-900"
+            <li>
+            <router-link to="/" class="text-base p-2 rounded-md text-gray-900"
               active-class="bg-primary text-white" aria-current="page">Home
+            </router-link>
+          </li>
+          </li>
+          <li>
+            <router-link to="/ViewComponent" class="text-base p-2 rounded-md text-gray-900"
+              active-class="bg-primary text-white" aria-current="page">View Expenses
             </router-link>
           </li>
           <li>
