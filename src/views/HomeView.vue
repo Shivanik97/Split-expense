@@ -8,9 +8,17 @@
         <h2 class="text-lg font-bold mb-4 text-black">"In Money We Trust, In Split We Prosper!"</h2>
         <router-link to=""
           class="cursor-pointer rounded-[4px]  bg-primary px-3 py-[6px] text-center font-semibold text-white">
-          Get started
+          Get Started
         </router-link>
       </div>
+    </div>
+    <div class="flex justify-center mt-4 space-x-4 hover:animate-bounce">
+      <img src="../assets/expense.png"/>
+      <img src="../assets/group.png" />
+      <img src="../assets/home.png" />
+      <img src="../assets/trips.png" />
+      <img src="../assets/food.png" />
+      <img src="../assets/cart.png" />
     </div>
 
     <!-- Content -->
@@ -23,3 +31,4 @@
     </div>
   </div>
 </template>
+
