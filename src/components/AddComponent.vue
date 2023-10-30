@@ -1,7 +1,7 @@
 <template>
     <div class="flex p-8 justify-center">
         <form @submit.prevent="submitForm">
-            <div class="w-full p-4 max-w-md bg-white border border-gray-500 rounded-lg shadow-xl sm:p-8">
+            <div class="w-full p-4 max-w-md bg-white border border-primary rounded-lg shadow-xl sm:p-8">
                 <div class="mx-auto bg-white">
                     <div class="flex items-center justify-center">
                         <span class="font-bold text-base text-black">Add Expense</span>
@@ -9,29 +9,30 @@
 
                     <div class="mt-6">
                         <div class="font-semibold">Enter expense amount</div>
-                        <div><input class="mt-1 w-full rounded-[4px] border border-[#A0ABBB] p-2" v-model="formData.amount"
+                        <div><input class="mt-1 w-full rounded-[4px] border border-secondary p-2" v-model="formData.amount"
                                 type="number" /></div>
                         <div class="font-semibold">What is this expense for?</div>
-                        <div><input class="mt-1 w-full rounded-[4px] border border-[#A0ABBB] p-2"
+                        <div><input class="mt-1 w-full rounded-[4px] border border-secondary p-2"
                                 v-model="formData.description" type="text" /></div>
                     </div>
 
                     <div class="mt-6">
                         <div class="font-semibold">Paid by</div>
                         <div class="mt-2">
-                            <div class="flex w-full items-center justify-between bg-neutral-100 p-3 rounded-[4px]">
+                            <div class="flex w-full border border-secondary items-center justify-between bg-neutral-100 p-3 rounded-md">
                                 <div class="flex items-center gap-x-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" fill="none" class="stroke-primary w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
                                     <div>
                                         <select id="payerUserid" style="width: 250px"
-                                            class="bg-gray-50 border block text-ellipsis overflow-hidden ... border-gray-300 text-gray-900 text-sm rounded-lg p-1"
+                                            class="bg-gray-50 border block text-ellipsis overflow-hidden ... border-secondary text-gray-900 text-sm rounded-lg p-1"
                                             v-model="selectedEmail">
-                                            <option v-for="email in suggestedEmails" :key="email" :value="email">{{
-                                                emailWithMe(email,
+                                            <option v-for="email in suggestedEmails" :key="email" :value="email"
+                                                :class="{ 'font-bold text-white bg-primary': email === user?.email }">
+                                                {{ emailWithMe(email,
                                                     formData.payerUserId, user?.email) }}
                                             </option>
                                         </select>
@@ -45,7 +46,7 @@
                         <div class="font-semibold">Date</div>
                         <div class="mt-2">
                             <div>
-                                <input type="date" class="bg-neutral-100 rounded-lg p-3 w-full" v-model="formData.date" />
+                                <input type="date" class="bg-neutral-100 border border-secondary rounded-md p-3 w-full" v-model="formData.date" />
                             </div>
                         </div>
                     </div>
@@ -70,7 +71,7 @@
                                     <div class="flex items-center space-x-4">
                                         <input id="checkbox-{{ index }}" type="checkbox" :value="participant"
                                             v-model="selectedPeople"
-                                            class="w-4 h-4 text-cyan-200 bg-gray-100 border-gray-300 rounded focus:ring-cyan-200" />
+                                            class="w-4 h-4 text-cyan-200 bg-gray-100 border border-secondary rounded-md focus:ring-cyan-200" />
                                         <div class="flex-1 min-w-0">
                                             <p class="text-sm font-medium text-gray-900 truncate">
                                                 {{ emailWithMe(participant.userId,
@@ -102,13 +103,14 @@
             <div class="absolute inset-0 bg-gray-800 opacity-75" @click="closeAddPeopleDialog"></div>
             <div class="relative bg-white border rounded-lg shadow-xl max-w-md p-8">
                 <h2 class="text-xl font-semibold mb-4 ">Add People to Split</h2>
-                <div class="bg-gradient-to-r from-primary from-20%  to-secondary to-80% text-white" v-for="email in suggestedEmails" :key="email">
+                <div class="bg-gradient-to-r from-primary from-20%  to-secondary to-80% text-white"
+                    v-for="email in suggestedEmails" :key="email">
                     <span class="px-2 cursor-copy" @click="copyEmail(email)">{{ email }} <span
                             class="close-icon  text-white cursor-pointer"
                             @click="removeSuggestion(email)">&times;</span></span>
                 </div>
                 <input v-model="userIdInput" type="text" placeholder="User ID"
-                    class="mt-4 p-2 w-full border border-gray-300 rounded-md" />
+                    class="mt-4 p-2 w-full border border-secondary rounded-md" />
 
                 <button
                     class="w-full cursor-pointer rounded-[4px] mt-2 bg-primary px-3 py-[6px] text-center font-semibold text-white"
@@ -255,4 +257,6 @@ onMounted(() => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

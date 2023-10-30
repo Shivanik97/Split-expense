@@ -1,5 +1,5 @@
 <template>
-    <div class="m-4 max-w-full p-2 bg-white border border-gray-500 rounded-lg shadow-xl sm:p-8">
+    <div class="m-4 max-w-full p-2 bg-white border border-primary rounded-lg shadow-xl sm:p-8">
         <h1 class="flex justify-center font-bold text-lg">Edit Expense</h1>
         <div class="row">
             <div class="col-md-12 add-card">
@@ -11,13 +11,13 @@
                         <div class="mb-3">
                             <label for="expenseDescription" class="font-semibold">Description</label>
                             <input type="text" id="expenseDescription"
-                                class="mt-1 w-full rounded-[4px] border border-[#A0ABBB] p-2"
+                                class="mt-1 w-full rounded-md border border-secondary p-2"
                                 v-model="expense.description" />
                         </div>
                         <div class="mb-3">
                             <label for="payerUserId" class="font-semibold">Payer</label>
                             <select id="payerUserId"
-                                class="mt-2 border block text-ellipsis overflow-hidden ... border-gray-300 text-gray-900 text-sm rounded-lg p-1"
+                                class="mt-2 p-2 border border-secondary block text-ellipsis overflow-hidden ... text-gray-900 text-sm rounded-md"
                                 v-model="expense.payerUserId">
                                 <option value="" disabled>Select a payer</option>
                                 <option v-for="email in suggestedEmails" :key="email" :value="email">
@@ -28,11 +28,11 @@
                         <div class="mb-3">
                             <label for="expenseAmount" class="font-semibold">Amount</label>
                             <input type="number" id="expenseAmount"
-                                class="mt-1 w-full rounded-[4px] border border-[#A0ABBB] p-2" v-model="expense.amount" />
+                                class="mt-1 w-full rounded-md border border-secondary p-2" v-model="expense.amount" />
                         </div>
                         <div class="mb-3">
                             <label for="expenseDate" class="font-semibold">Date</label>
-                            <input type="date" id="expenseDate" class="bg-neutral-100 p-3 w-full" :value="formattedDate"
+                            <input type="date" id="expenseDate" class="bg-neutral-100 p-2 w-full rounded-md border border-secondary" :value="formattedDate"
                                 @input="updateDate" />
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                                     <tr v-for="(participant, index) in expense.participants" :key="index">
                                         <td>
                                             <select :id="`participantName${index}`"
-                                                class="border border-gray-300 text-ellipsis overflow-hidden ... text-gray-900 text-sm rounded-lg p-2 w-full"
+                                                class="border border-secondary text-ellipsis overflow-hidden ... text-gray-900 text-sm rounded-md p-2 w-full"
                                                 v-model="participant.userId">
                                                 <option value="" disabled>Select a payer</option>
                                                 <option v-for="email in suggestedEmails" :key="email" :value="email">{{
@@ -71,7 +71,7 @@
                                         <td>
                                             <div class="ml-2 inline-flex items-center">
                                                 <input :id="`participantShare${index}`"
-                                                    class="border border-gray-300 text-ellipsis overflow-hidden ... text-gray-900 text-sm rounded-lg p-2 w-full"
+                                                    class="border border-secondary text-ellipsis overflow-hidden ... text-gray-900 text-sm rounded-md p-2 w-full"
                                                     v-model="participant.share" />
                                                 <button @click="removeParticipant(index)" class="cancel-icon">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
