@@ -124,7 +124,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useToast } from 'vue-toastification'
 import axiosInstance from '../services/api'
 import router from '@/router';
@@ -206,6 +206,28 @@ const addSelectedPeople = () => {
     selectedUserId.value = '';
     closeAddPeopleDialog();
 };
+const watchExpenseAmount = () => {
+    // Watch for changes in the expense amount
+    watch(() => formData.value.amount, (newAmount) => {
+        const numPeople = selectedPeople.value.length;
+        const equalShare = newAmount / (numPeople + 1);
+
+        selectedPeople.value.forEach((person) => {
+            person.share = equalShare;
+        });
+    });
+};
+
+watchExpenseAmount();
+
+watch(() => selectedPeople.value, (newSelectedPeople) => {
+    const numPeople = newSelectedPeople.length;
+    const equalShare = formData.value.amount / numPeople;
+
+    newSelectedPeople.forEach((person) => {
+        person.share = equalShare;
+    });
+});
 const removeSuggestion = (index: number) => {
     suggestedEmails.value.splice(index, 1);
 };
