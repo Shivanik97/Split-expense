@@ -166,12 +166,25 @@ const addParticipant = () => {
         })
     }
 }
-
-const removeParticipant = (index: number) => {
-    if (expense.value?.participants) {
-        expense.value.participants.splice(index, 1)
+const calculateShares = () => {
+    if (expense.value && expense.value.participants) {
+        const numParticipants = expense.value.participants.length;
+        if (numParticipants > 0) {
+            const equalShare = expense.value.amount / numParticipants;
+            expense.value.participants.forEach((participant) => {
+                participant.share = equalShare;
+            });
+        }
     }
-}
+};
+watch(() => expense.value?.amount, calculateShares);
+watch(() => expense.value?.participants, calculateShares, { deep: true });
+const removeParticipant = (index: number) => {
+    if (expense.value && expense.value.participants) {
+        expense.value.participants.splice(index, 1);
+        calculateShares(); // Recalculate shares when a participant is removed
+    }
+};
 
 const updateDate = (event: Event) => {
     if (expense.value) {
