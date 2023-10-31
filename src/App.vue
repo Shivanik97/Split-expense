@@ -2,7 +2,7 @@
   <header class="bg-primary">
     <nav class="flex px-2 py-2 items-center justify-between ml-2 sticky top-0" aria-label="Global">
       <div class="flex lg:flex-1">
-        <a class="flex items-center" href="/">
+        <router-link class="flex items-center" to="/">
           <svg class="w-10 h-auto" width="100" height="100" viewBox="0 0 100 100" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <rect width="100" height="100" rx="10" fill="white" />
@@ -11,7 +11,7 @@
               fill="#336963" />
           </svg>
           <span class="ml-2 self-center text-2xl font-semibold whitespace-nowrap text-white">Bill-Buddy</span>
-        </a>
+        </router-link>
       </div>
       <div class=" lg:flex lg:flex-1 lg:justify-end">
         <div v-if="!isAuthenticated">
@@ -33,20 +33,20 @@
       <div class="flex items-center">
         <ul class="flex flex-row font-medium mt-0 space-x-4 text-sm">
           <li>
-            <li>
-            <router-link to="/" class="text-base p-2 rounded-md text-gray-900"
-              active-class="bg-primary text-white" aria-current="page">Home
+            <router-link to="/" class="text-base p-2 rounded-md text-gray-900" active-class="bg-primary text-white"
+              aria-current="page" :style="isActiveLink('/') ? activeLink : inactiveLink">
+              Home
             </router-link>
-          </li>
           </li>
           <li>
             <router-link to="/ViewComponent" class="text-base p-2 rounded-md text-gray-900"
-              active-class="bg-primary text-white" aria-current="page">View Expenses
+              active-class="bg-primary text-white" :style="isActiveLink('/ViewComponent') ? activeLink : inactiveLink">
+              View Expenses
             </router-link>
           </li>
           <li>
             <router-link to="/AddExpense" class="text-base p-2 rounded-md text-gray-900"
-              active-class="bg-primary text-white">
+              active-class="bg-primary text-white" :style="isActiveLink('/AddExpense') ? activeLink : inactiveLink">
               Add Expense
             </router-link>
           </li>
@@ -72,8 +72,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { auth0 } from "./config/config";
+import router from "./router";
 // Other setup logic
 const { loginWithRedirect, isAuthenticated, logout, user } = auth0;
 const isDropdownVisible = ref(false);
@@ -93,8 +94,18 @@ const login = () => {
 const logoutUser = () => {
   logout({ logoutParams: { returnTo: window.location.origin } });
 };
+const activeLink = {
+  backgroundColor: 'primary',
+  color: 'white',
+};
 
-
+const inactiveLink = {
+  border: '1px solid #6a8a9d',
+  color: 'black',
+};
+const isActiveLink = (to: string) => {
+  return computed(() => router.currentRoute.value.path === to).value;
+};
 </script>
 
 <style scoped></style>
