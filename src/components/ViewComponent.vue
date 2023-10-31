@@ -3,11 +3,11 @@
         <nav>
             <div class="flex p-4 mb-1 mt-2 justify-center" id="nav-tab" role="tablist">
                 <button
-                    class="transform active:scale-75 transition-transform mr-2 px-4 font-semibold py-2 text-lg rounded-md"
+                    class="transform active:scale-75 hover:scale-105 transition-transform mr-2 px-4 font-semibold py-2 text-lg rounded-md"
                     :class="{ 'border border-secondary': isActiveTab('All') }" @click.prevent="activeTab = 'All'">
                     Transactions
                 </button>
-                <button class="transform active:scale-75 transition-transform px-4 font-semibold py-2 text-lg rounded-md"
+                <button class="transform active:scale-75 hover:scale-105 transition-transform px-4 font-semibold py-2 text-lg rounded-md"
                     :class="{ 'border border-secondary': isActiveTab('Archived') }" @click.prevent="activeTab = 'Archived'">
                     Archived
                 </button>

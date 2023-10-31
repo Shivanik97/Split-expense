@@ -17,6 +17,9 @@ export default {
         'primary': '#336963',
         'secondary': '#6a8a9d',
       },
+      fontFamily: {
+        'sans': ['"Trebuchet MS", sans-serif'],
+      },
     },
   },
   plugins: [],
