@@ -151,7 +151,6 @@ const formData = ref({
 
 const suggestedEmails = ref([]);
 const selectedEmail = ref('You');
-const userIdInput = ref('');
 const shareInput = ref(0);
 const selectedUserId = ref('');
 

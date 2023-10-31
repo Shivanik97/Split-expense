@@ -11,8 +11,7 @@
                         <div class="mb-3">
                             <label for="expenseDescription" class="font-semibold">Description</label>
                             <input type="text" id="expenseDescription"
-                                class="mt-1 w-full rounded-md border border-secondary p-2"
-                                v-model="expense.description" />
+                                class="mt-1 w-full rounded-md border border-secondary p-2" v-model="expense.description" />
                         </div>
                         <div class="mb-3">
                             <label for="payerUserId" class="font-semibold">Payer</label>
@@ -32,7 +31,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="expenseDate" class="font-semibold">Date</label>
-                            <input type="date" id="expenseDate" class="bg-neutral-100 p-2 w-full rounded-md border border-secondary" :value="formattedDate"
+                            <input type="date" id="expenseDate"
+                                class="bg-neutral-100 p-2 w-full rounded-md border border-secondary" :value="formattedDate"
                                 @input="updateDate" />
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                     <div class="flex justify-start">
                         <h5 class="font-semibold mb-2">Participants</h5>
                         <button class="add-button border-0 ml-2 pb-1 rounded-pill" @click="addParticipant">
-                            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" stroke-width="1.5"
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5"
                                 class="w-5 fill-primary stroke-secondary">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
@@ -112,14 +112,15 @@
   
  
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
+import { useToast } from 'vue-toastification'
 import { useRouter, useRoute } from 'vue-router'
 import axiosInstance from '../services/api'
 import type { GetTransactionData } from '../models/model'
 
 const expense = ref<GetTransactionData | null>(null)
 const suggestedEmails = ref<string[]>([])
-
+const toast = useToast()
 const router = useRouter()
 const route = useRoute()
 const formattedDate = ref<string>('')
@@ -180,15 +181,41 @@ const updateDate = (event: Event) => {
     formattedDate.value = (event.target as HTMLInputElement).value
 }
 
+
+const updateShares = () => {
+    if (expense.value && expense.value.participants) {
+        const numParticipants = expense.value.participants.length;
+        if (numParticipants > 0) {
+            const equalShare = expense.value.amount / numParticipants;
+            expense.value.participants.forEach((participant) => {
+                participant.share = equalShare;
+            });
+        }
+    }
+};
+
+// Watch for changes in expense amount
+watch(expense, (newExpense) => {
+    if (newExpense) {
+        updateShares();
+    }
+    // Recalculate shares if expense.amount changes
+    watch(() => expense.value?.amount, () => {
+        updateShares();
+    });
+});
+
+
 const updateExpense = async () => {
     if (expense.value) {
         try {
             const transactionId = route.params.id
             const postData = expense.value
             const response = await axiosInstance.put(`/editTransaction/${transactionId}`, postData)
-            console.log('Expense updated successfully:', response)
+            toast.success('Transaction updated successfully!')
             router.push('/ViewComponent')
         } catch (error) {
+            toast.error('Transaction could not be updated')
             console.error('Error updating expense:', error)
         }
     }
