@@ -20,7 +20,7 @@
         </div>
         <div v-else>
           <button id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation"
-            class=" mr-3 text-sm rounded-full md:mr-0 focus:ring-2 focus:ring-gray-600 text-white  font-medium py-2.5 px-2.5   text-center flex items-center"
+            class=" mr-3 text-sm rounded-full md:mr-0 focus:ring-1 focus:ring-secondary text-white font-medium  text-center flex items-center"
             type="button" @click="toggleDropdown">
             <img :src="user?.picture" class="h-6 rounded-xl" />
           </button>

@@ -152,9 +152,9 @@
                                 Participants:
                             </p>
                             <div
-                                class="flex text-center mt-4 rounded-md px-1 font-medium text-white bg-gradient-to-r from-primary to-secondary">
+                                class="flex text-center mt-4 justify-center rounded-md px-1 font-medium text-white bg-gradient-to-r from-primary to-secondary">
                                 {{ expense.participants?.map(participant => participant.userId).join(', ') ||
-                                    'Noparticipants'
+                                    'No Participants'
                                 }}
                             </div>
                         </div>

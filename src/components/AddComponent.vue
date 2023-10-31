@@ -9,7 +9,7 @@
 
                     <div class="mt-6">
                         <div class="font-semibold">Enter expense amount</div>
-                        <div><input class="mt-1 w-full rounded-[4px] border border-secondary p-2" v-model="formData.amount"
+                        <div><input class="mt-1 w-full rounded-[4px] border border-secondary p-2 " v-model="formData.amount"
                                 type="number" /></div>
                         <div class="font-semibold">What is this expense for?</div>
                         <div><input class="mt-1 w-full rounded-[4px] border border-secondary p-2"
@@ -103,13 +103,13 @@
             <div class="absolute inset-0 bg-gray-800 opacity-75" @click="closeAddPeopleDialog"></div>
             <div class="relative bg-white border rounded-lg shadow-xl max-w-md p-8">
                 <h2 class="text-xl font-semibold mb-4 ">Add People to Split</h2>
-                <div class="bg-gradient-to-r from-primary from-20%  to-secondary to-80% text-white"
+                <div class="bg-gradient-to-r from-primary from-20%  to-secondary to-80% rounded-md m-2 text-white"
                     v-for="email in suggestedEmails" :key="email">
-                    <span class="px-2 cursor-copy" @click="copyEmail(email)">{{ email }} <span
+                    <span class="flex px-2 cursor-copy justify-between" @click="copyEmail(email)">{{ email }} <span
                             class="close-icon  text-white cursor-pointer"
                             @click="removeSuggestion(email)">&times;</span></span>
                 </div>
-                <input v-model="userIdInput" type="text" placeholder="User ID"
+                <input v-model="selectedUserId" type="text" placeholder="User ID"
                     class="mt-4 p-2 w-full border border-secondary rounded-md" />
 
                 <button
@@ -153,7 +153,7 @@ const suggestedEmails = ref([]);
 const selectedEmail = ref('You');
 const userIdInput = ref('');
 const shareInput = ref(0);
-
+const selectedUserId = ref('');
 
 interface Participant {
     userId: string;
@@ -190,7 +190,7 @@ const closeAddPeopleDialog = () => {
 
 const addSelectedPeople = () => {
     const newPerson = {
-        userId: userIdInput.value,
+        userId: selectedUserId.value,
         share: 0,
     };
     const numPeople = selectedPeople.value.length;
@@ -202,7 +202,7 @@ const addSelectedPeople = () => {
 
     newPerson.share = equalShare;
     selectedPeople.value = [...selectedPeople.value, newPerson];
-    userIdInput.value = '';
+    selectedUserId.value = '';
     shareInput.value = 0;
     closeAddPeopleDialog();
 };
@@ -210,12 +210,7 @@ const removeSuggestion = (index: number) => {
     suggestedEmails.value.splice(index, 1);
 };
 const copyEmail = (email: string) => {
-    const textArea = document.createElement('textarea');
-    textArea.value = email;
-    document.body.appendChild(textArea);
-    textArea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textArea);
+    selectedUserId.value = email;
 };
 
 const isFormReady = ref(false);
