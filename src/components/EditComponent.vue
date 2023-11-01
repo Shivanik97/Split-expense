@@ -95,7 +95,7 @@
                             <button
                                 class="cursor-pointer rounded-[4px] mt-2 ml-2 bg-primary px-3 py-[6px] text-center font-semibold text-white"
                                 @click="cancelExpense">
-                                Cancel
+                                Reset
                             </button>
                             <router-link to="/ViewComponent"
                                 class="cursor-pointer rounded-[4px] mt-2 ml-2 bg-primary px-3 py-[6px] text-center font-semibold text-white">

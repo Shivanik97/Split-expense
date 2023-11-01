@@ -7,9 +7,10 @@
                     :class="{ 'border border-secondary': isActiveTab('All') }" @click.prevent="activeTab = 'All'">
                     Transactions
                 </button>
-                <button class="transform active:scale-75 hover:scale-105 transition-transform px-4 font-semibold py-2 text-lg rounded-md"
-                    :class="{ 'border border-secondary': isActiveTab('Archived') }" @click.prevent="activeTab = 'Archived'">
-                    Archived
+                <button
+                    class="transform active:scale-75 hover:scale-105 transition-transform px-4 font-semibold py-2 text-lg rounded-md"
+                    :class="{ 'border border-secondary': isActiveTab('Archived') }"
+                    @click.prevent="activateArchivedTab">Archived
                 </button>
             </div>
         </nav>
@@ -110,8 +111,8 @@
                         <div class="md:inline-flex">
                             <router-link :to="{ name: 'Update', params: { id: expense._id } }"
                                 class="transform transition duration-500 hover:scale-105 bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 border-secondary border rounded inline-flex items-center">
-                                <svg class="stroke-secondary w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
-                                    fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <svg class="stroke-secondary w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                                 </svg>
@@ -219,6 +220,7 @@ const fetchArchivedTransactions = async () => {
         const response = await axiosInstance.get('/archived-transactions')
         Archivedexpenses.value = response.data
         console.log(response.data)
+        isLoading.value = false;
     } catch (error) {
         console.error('Error fetching transaction data:', error)
     }
@@ -228,12 +230,18 @@ const archiveTransaction = async (id: any) => {
     try {
         const response = await axiosInstance.post(`/transactions/${id}/archive`)
         expenses.value = response.data
-        fetchData()
+        fetchData();
+        activeTab.value = 'Archived';
     } catch (error) {
 
         console.error('Error fetching transaction data:', error)
     }
 }
+const activateArchivedTab = () => {
+    activeTab.value = 'Archived';
+    console.log('Activated "Archived" tab');
+    fetchArchivedTransactions();
+};
 
 // Function to format a date
 const formatDate = (date: string | Date) => {
