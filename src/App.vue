@@ -19,11 +19,36 @@
               aria-hidden="true"></span></a>
         </div>
         <div v-else>
-          <button id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation"
-            class=" mr-3 text-sm rounded-full md:mr-0 focus:ring-1 focus:ring-secondary text-white font-medium  text-center flex items-center"
-            type="button" @click="toggleDropdown">
-            <img :src="user?.picture" class="h-6 rounded-xl" />
-          </button>
+          <Menu as="div" class="relative ml-3">
+            <div>
+              <MenuButton
+                class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                <span class="absolute -inset-1.5" />
+                <span class="sr-only">Open user menu</span>
+                <img class="h-8 w-8 rounded-full" :src="user?.picture" alt="" />
+              </MenuButton>
+            </div>
+            <transition enter-active-class="transition ease-out duration-100"
+              enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
+              leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100"
+              leave-to-class="transform opacity-0 scale-95">
+              <MenuItems
+                class="absolute w-max top-10 right-0 z-10 mt-2 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <MenuItem v-slot="{ active }" class="divide-gray-100 divide-y">
+                <div :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">
+                  {{ user?.given_name }}</div>
+                </MenuItem>
+                <MenuItem v-slot="{ active }">
+                <div :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ user?.email
+                }}</div>
+                </MenuItem>
+                <MenuItem v-slot="{ active }" >
+                <a href="#"  :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
+                  @click="logoutUser">Log out</a>
+                </MenuItem>
+              </MenuItems>
+            </transition>
+          </Menu>
         </div>
       </div>
     </nav>
@@ -54,17 +79,6 @@
       </div>
     </div>
   </nav>
-  <!-- Dropdown menu -->
-  <div id="dropdownInformation"
-    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-max  absolute top-16 right-0 mt-2">
-    <div class="px-4 py-3 text-sm text-gray-900">
-      <div>{{ user?.given_name }}</div>
-      <div class="font-medium truncate">{{ user?.email }}</div>
-    </div>
-    <div class="py-2">
-      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 " @click="logoutUser">LogOut</a>
-    </div>
-  </div>
   <!-- Main content -->
   <main></main>
   <!-- Footer -->
@@ -73,19 +87,12 @@
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { auth0 } from "./config/config";
 import router from "./router";
 // Other setup logic
 const { loginWithRedirect, isAuthenticated, logout, user } = auth0;
-const isDropdownVisible = ref(false);
 
-const toggleDropdown = () => {
-  isDropdownVisible.value = !isDropdownVisible.value;
-  const dropdownMenu = document.getElementById('dropdownInformation');
-  if (dropdownMenu) {
-    dropdownMenu.classList.toggle('hidden');
-  }
-};
 
 const login = () => {
   loginWithRedirect();
