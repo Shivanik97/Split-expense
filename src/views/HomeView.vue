@@ -22,8 +22,8 @@
     </div>
 
     <!-- Content -->
-    <div class="container mx-auto py-8 px-4">
-      <p class="text-lg font-semibold text-gray-700 leading-7">
+    <div class="mx-auto py-8 px-4">
+      <p class="flex text-lg justify-center font-semibold text-gray-700 leading-7">
         A platform where financial harmony and shared prosperity go hand in hand. We believe in trust, fairness, and smart
         money management. Join us in your journey towards a brighter financial future.
       </p>

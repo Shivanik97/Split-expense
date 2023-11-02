@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="">
         <nav>
             <div class="flex p-4 mb-1 mt-2 justify-center" id="nav-tab" role="tablist">
                 <button
@@ -25,7 +25,7 @@
         <div v-else-if="isActiveTab('All')" class="mx-auto max-w-screen ">
             <div class="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 <div v-for="expense in expenses" :key="expense._id" v-if="isActiveTab('All')"
-                    class="w-full shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] p-2 max-w-md bg-white border rounded-lg sm:p-8 transform transition duration-500 hover:scale-105">
+                    class="w-full bg-gray-50 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] p-2 max-w-md border rounded-lg sm:p-8 transform transition duration-500 hover:scale-105">
                     <div class="flex flex-col items-center md:flex-row justify-evenly mb-4">
                         <img :src="expense.payerProfilePicture" class="mb-2 mr-2 md:mb-0 w-12 rounded-full h-12" />
                         <div class="md:inline-flex">
@@ -106,7 +106,7 @@
         <div v-else-if="isActiveTab('Archived')" class="mx-auto max-w-screen px-4">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 <div v-for="expense in Archivedexpenses" :key="expense._id" v-if="isActiveTab('Archived')"
-                    class="w-full shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] transform transition duration-500 hover:scale-105 p-3 max-w-md bg-white border rounded-lg sm:p-8 ">
+                    class="w-full shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] transform transition duration-500 hover:scale-105 p-3 max-w-md bg-gray-50 border rounded-lg sm:p-8 ">
                     <div class="flex flex-col items-center md:flex-row justify-evenly mb-4">
                         <div class="md:inline-flex">
                             <router-link :to="{ name: 'Update', params: { id: expense._id } }"

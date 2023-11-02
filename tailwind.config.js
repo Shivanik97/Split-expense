@@ -16,6 +16,7 @@ export default {
       colors: {
         'primary': '#336963',
         'secondary': '#6a8a9d',
+        'tertiary': '#faf9f6'
       },
       fontFamily: {
         'sans': ['"Trebuchet MS", sans-serif'],
