@@ -3,16 +3,16 @@
         <form @submit.prevent="submitForm">
             <div class="w-full p-4 max-w-md bg-white border border-primary rounded-lg shadow-xl sm:p-8">
                 <div class="mx-auto bg-white">
-                    <div class="flex items-center justify-center">
-                        <span class="font-bold text-base text-black">Add Expense</span>
+                    <div class="flex items-center p-3 justify-center bg-primary rounded-md">
+                        <span class="font-bold text-base text-white">Add Expense</span>
                     </div>
 
                     <div class="mt-6">
                         <div class="font-semibold">Enter expense amount</div>
                         <div><input class="mt-1 w-full rounded-[4px] border border-secondary p-2 " v-model="formData.amount"
                                 type="number" /></div>
-                        <div class="font-semibold">What is this expense for?</div>
-                        <div><input class="mt-1 w-full rounded-[4px] border border-secondary p-2"
+                        <div class="font-semibold mt-6">What is this expense for?</div>
+                        <div><input class="mt-1 w-full rounded-[4px] border border-secondary p-2" placeholder="Description"
                                 v-model="formData.description" type="text" /></div>
                     </div>
 
@@ -31,13 +31,14 @@
                                         <select id="payerUserid" style="width: 250px"
                                             class="bg-gray-50 border block text-ellipsis overflow-hidden ... border-secondary text-gray-900 text-sm rounded-lg p-1"
                                             v-model="selectedEmail">
+                                            <option disabled value="Select a payer">Select a Payer</option>
                                             <option v-for="email in suggestedEmails" :key="email" :value="email"
                                                 :class="{ 'font-bold text-white bg-primary': email === user?.email }">
-                                                {{ emailWithMe(email,
-                                                    formData.payerUserId, user?.email) }}
+                                                {{ emailWithMe(email, formData.payerUserId, user?.email) }}
                                             </option>
                                         </select>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -48,7 +49,7 @@
                         <div class="mt-2">
                             <div>
                                 <input type="date" class="bg-neutral-100 border border-secondary rounded-md p-3 w-full"
-                                    v-model="formData.date" />
+                                    v-model="formData.date"/>
                             </div>
                         </div>
                     </div>
@@ -125,14 +126,14 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue';
-import { useToast } from 'vue-toastification'
-import axiosInstance from '../services/api'
+import { useToast } from 'vue-toastification';
+import axiosInstance from '../services/api';
 import router from '@/router';
-import { useAuth0 } from '@auth0/auth0-vue'
+import { useAuth0 } from '@auth0/auth0-vue';
 
-const { user } = useAuth0()
+const { user } = useAuth0();
+const toast = useToast();
 
-const toast = useToast()
 const formData = ref({
     _id: '',
     payerUserId: '',
@@ -152,18 +153,17 @@ const formData = ref({
 });
 
 const suggestedEmails = ref([]);
-const selectedEmail = ref('You');
+const selectedEmail = ref('Select a payer'); // Set your default value here
 const shareInput = ref(0);
 const selectedUserId = ref('');
 
 interface Participant {
     userId: string;
     share: number;
-};
+}
 const selectedPeople = ref<Participant[]>([]);
 
 const isAddPeopleModalOpen = ref(false);
-
 
 const getSuggestedEmails = async () => {
     try {
@@ -172,18 +172,20 @@ const getSuggestedEmails = async () => {
     } catch (error) {
         console.error('Error fetching suggested emails:', error);
     }
-}
+};
+
 const emailWithMe = computed(() => (email: any, userId: any, currentUser: any) => {
     if (currentUser && email === currentUser) {
         return `${email} (ME)`;
     }
     return email;
-})
+});
 
 const openAddPeopleDialog = () => {
     isAddPeopleModalOpen.value = true;
     isFormReady.value = false;
 };
+
 const closeAddPeopleDialog = () => {
     isAddPeopleModalOpen.value = false;
     isFormReady.value = true;
@@ -206,6 +208,7 @@ const addSelectedPeople = () => {
     selectedUserId.value = '';
     closeAddPeopleDialog();
 };
+
 const watchExpenseAmount = () => {
     // Watch for changes in the expense amount
     watch(() => formData.value.amount, (newAmount) => {
@@ -228,9 +231,11 @@ watch(() => selectedPeople.value, (newSelectedPeople) => {
         person.share = equalShare;
     });
 });
+
 const removeSuggestion = (index: number) => {
     suggestedEmails.value.splice(index, 1);
 };
+
 const copyEmail = (email: string) => {
     selectedUserId.value = email;
 };
@@ -248,23 +253,23 @@ const submitForm = async () => {
             payerUserId: selectedEmail.value,
             participants: selectedPeople.value,
             isArchived: formData.value.isArchived,
-            date: formData.value.date
+            date: formData.value.date,
         };
         const response = await axiosInstance.post('/addTransaction', postData);
-        toast.success('Transaction added successfully!')
+        toast.success('Transaction added successfully!');
         console.log('Response:', response.data);
 
         formData.value.description = '';
         formData.value.amount = 0;
-        selectedEmail.value = '';
+        selectedEmail.value = ''; // Reset the selectedEmail here
         formData.value.isArchived = false;
         selectedPeople.value = [];
         formData.value.date = '';
 
         isFormReady.value = false;
-        router.push('/ViewComponent')
+        router.push('/ViewComponent');
     } catch (error) {
-        toast.error('Failed to create transaction')
+        toast.error('Failed to create transaction');
         console.error('Error:', error);
     }
 };
@@ -273,5 +278,6 @@ onMounted(() => {
     getSuggestedEmails();
 });
 </script>
+
 
 <style scoped></style>

@@ -1,6 +1,6 @@
 <template>
-    <div class="m-4 max-w-full p-2 bg-white border border-primary rounded-lg shadow-xl sm:p-8">
-        <h1 class="flex justify-center font-bold text-lg">Edit Expense</h1>
+    <div class="m-8 max-w-full p-2 bg-white border border-primary rounded-lg shadow-xl sm:p-8">
+        <h1 class="flex justify-center font-bold text-lg p-3 text-white bg-primary rounded-md">Edit Expense</h1>
         <div class="row">
             <div class="col-md-12 add-card">
                 <div class="mb-4">
@@ -10,7 +10,7 @@
                     <div class="mt-6" v-if="expense">
                         <div class="mb-3">
                             <label for="expenseDescription" class="font-semibold">Description</label>
-                            <input type="text" id="expenseDescription"
+                            <input type="text" id="expenseDescription" placeholder="Description"
                                 class="mt-1 w-full rounded-md border border-secondary p-2" v-model="expense.description" />
                         </div>
                         <div class="mb-3">
