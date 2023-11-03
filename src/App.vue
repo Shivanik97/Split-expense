@@ -26,7 +26,7 @@
                   class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                   <span class="absolute -inset-1.5" />
                   <span class="sr-only">Open user menu</span>
-                  <img class="h-8 w-8 rounded-full" :src="user?.picture" alt="" />
+                  <img class="h-8 w-8 rounded-full" :src="user?.picture" referrerPolicy="no-referrer" alt="" />
                 </MenuButton>
               </div>
               <transition enter-active-class="transition ease-out duration-100"
@@ -39,6 +39,7 @@
                   <div :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">
                     {{ user?.given_name }}</div>
                   </MenuItem>
+                  <hr class="h-px bg-gray-200 border-0">
                   <MenuItem v-slot="{ active }">
                   <div :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ user?.email
                   }}</div>

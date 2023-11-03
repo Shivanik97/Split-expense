@@ -1,7 +1,7 @@
 <template>
     <div class="flex p-8 justify-center">
         <form @submit.prevent="submitForm">
-            <div class="w-full p-4 max-w-md bg-white border border-primary rounded-lg shadow-xl sm:p-8">
+            <div class="w-full p-4 max-w-md drop-shadow-2xl bg-white border border-primary rounded-lg sm:p-8">
                 <div class="mx-auto bg-white">
                     <div class="flex items-center p-3 justify-center bg-primary rounded-md">
                         <span class="font-bold text-base text-white">Add Expense</span>

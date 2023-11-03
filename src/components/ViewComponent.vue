@@ -1,7 +1,7 @@
 <template>
     <div class="">
         <nav>
-            <div class="flex p-4 mb-1 mt-2 justify-center" id="nav-tab" role="tablist">
+            <div class="flex p-4  justify-center" id="nav-tab" role="tablist">
                 <button
                     class="transform active:scale-75 hover:scale-105 transition-transform mr-2 px-4 font-semibold py-2 text-lg rounded-md"
                     :class="{ 'border border-secondary': isActiveTab('All') }" @click.prevent="activeTab = 'All'">
@@ -23,11 +23,16 @@
         </div>
 
         <div v-else-if="isActiveTab('All')" class="mx-auto max-w-screen ">
+            <div v-if="!isLoading && expenses.length === 0">
+                <p class="text-center text-2xl text-gray-600 font-semibold mt-16">You have not added any expenses yet</p>
+                <p class="flex justify-center text-gray-600 text-center text-2xl font-semibold mt-4">To add a new expense, click the "Add Expense" button.</p>
+            </div>
             <div class="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 <div v-for="expense in expenses" :key="expense._id" v-if="isActiveTab('All')"
                     class="w-full bg-gray-50 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] p-2 max-w-md border rounded-lg sm:p-8 transform transition duration-500 hover:scale-105">
+                    
                     <div class="flex flex-col items-center md:flex-row justify-evenly mb-4">
-                        <img :src="expense.payerProfilePicture" class="mb-2 mr-2 md:mb-0 w-12 rounded-full h-12" />
+                        <img :src="expense.payerProfilePicture" referrerPolicy="no-referrer" class="mb-2 mr-2 md:mb-0 w-12 rounded-full h-12" />
                         <div class="md:inline-flex">
                             <router-link :to="{ name: 'Update', params: { id: expense._id } }"
                                 class="transform transition duration-500 hover:scale-105 border-secondary border hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded inline-flex items-center">
@@ -72,7 +77,7 @@
 
                         </div>
                         <div class="mt-4 font-semibold">Payer: </div>
-                        <div class="mt-4 ml-2 rounded-md px-1 text-white text-sm font-semibold bg-[#429186]">
+                        <div class="mt-4 ml-2 rounded-md px-1 py-1 text-white text-sm font-semibold bg-[#429186]">
                             {{ expense.payerUserId }}
                         </div>
                     </div>
@@ -87,7 +92,7 @@
                     <ul role="list" class="inline-grid grid-cols-12 ">
                         <li class="py-3 sm:py-4" v-for="(participant, pIndex) in expense.participants" :key="pIndex">
                             <div class="">
-                                <img :src="participant.profilePicture" class="ml-1 rounded-xl w-6 h-6" />
+                                <img :src="participant.profilePicture" referrerPolicy="no-referrer" class="ml-1 rounded-xl w-6 h-6" />
                             </div>
                         </li>
                     </ul>
@@ -143,7 +148,7 @@
 
                         </div>
                         <div class="mt-4 font-semibold">Payer: </div>
-                        <div class="mt-4 ml-2 rounded-md px-1 text-white font-semibold bg-[#429186]">
+                        <div class="mt-4 ml-2 rounded-md px-1 py-1 text-white font-semibold bg-[#429186]">
                             {{ expense.payerUserId }}
                         </div>
                     </div>
